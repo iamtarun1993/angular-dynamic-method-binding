@@ -1,0 +1,62 @@
+<ng-container>
+  <h3>Without Dynmaic Method</h3>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Studio</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      <th>Disable</th>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{ user?.name }}</td>
+      <td>{{ user?.studio }}</td>
+      <td (click)="edit(user?.id)">
+        <mat-icon *ngIf="user?.canEdit">edit</mat-icon>
+      </td>
+      <td (click)="delete(user?.id)">
+        <mat-icon *ngIf="user?.canDelete">delete</mat-icon>
+      </td>
+      <td (click)="disable(user?.id)">
+        <mat-icon *ngIf="user?.canDisable">person_off</mat-icon>
+      </td>
+    </tr>
+  </table>
+</ng-container>
+
+<ng-container>
+  <h3>With Dynmaic Method</h3>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Studio</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      <th>Disable</th>
+      <th>View</th>
+    </tr>
+    <tr *ngFor="let user of usersWithDynamicMethod">
+      <td>{{ user?.name }}</td>
+      <td>{{ user?.studio }}</td>
+      <td>
+        <mat-icon (click)="editMethod(user?.id)">edit</mat-icon>
+        <!-- Check here, even if we missed *ngIf, but still method inside parent not called when canEdit is false -->
+      </td>
+      <td>
+        <mat-icon (click)="deleteMethod(user?.id)" *ngIf="user?.canDelete"
+          >delete</mat-icon
+        >
+      </td>
+      <td>
+        <mat-icon
+          (click)="commonMethod('DISABLE', user?.id)"
+          *ngIf="user?.canDisable"
+          >person_off</mat-icon
+        >
+      </td>
+      <td>
+        <mat-icon (click)="commonMethod('VIEW', user?.id)">visibility</mat-icon>
+      </td>
+    </tr>
+  </table>
+</ng-container>
