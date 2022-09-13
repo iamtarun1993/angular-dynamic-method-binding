@@ -20,7 +20,7 @@ export class ParentComponent implements OnInit {
         return {
           ...user,
           ...(user?.canEdit && {
-            editMethod: (data) => this.editUser(data?.id),
+            editMethod: (data) => this.editUser(data),
           }), // conditional method binding, passing editMethod() when only canEdit is true
           deleteMethod: (data) => this.deleteUser(data?.id),
           commonMethod: (data) =>
